@@ -1,4 +1,14 @@
 {
+  "name": "agenda-fixa-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@dyad-sh/react-vite-component-tagger": "^0.8.0",
     "@fullcalendar/core": "6.1.18",
