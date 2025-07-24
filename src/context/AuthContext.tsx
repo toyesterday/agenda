@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } else {
       setProfile(null);
     }
-  }, [user, location.pathname]);
+  }, [user]);
 
   useEffect(() => {
     const root = document.documentElement;
