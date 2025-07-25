@@ -1,24 +1,21 @@
 {
-  "short_name": "Agenda Fixa",
-  "name": "Agenda Fixa - Agendamento Online",
-  "description": "O sistema de agendamento que vai transformar seu negócio.",
+  "name": "Agenda Fixa",
+  "short_name": "AgendaFixa",
+  "description": "O sistema de agendamento que vai transformar seu negócio",
+  "start_url": "/agendar",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#111827",
   "icons": [
     {
-      "src": "/icon-192x192.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "/icon-512x512.png",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
-  ],
-  "start_url": "/",
-  "display": "standalone",
-  "scope": "/",
-  "theme_color": "#111827",
-  "background_color": "#111827"
+  ]
 }
