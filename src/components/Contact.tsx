@@ -11,7 +11,7 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    const phoneNumber = "5531991988796"; // Número de WhatsApp do "Fale Conosco"
+    const phoneNumber = "5531973149306"; // Número de WhatsApp do "Fale Conosco"
     const whatsappMessage = `Olá! Meu nome é ${name}.\n\nMensagem: ${message}`;
     const encodedMessage = encodeURIComponent(whatsappMessage);
     
@@ -33,11 +33,10 @@ const Contact = () => {
           <div className="space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-white">Fale Conosco</h2>
             <p className="text-gray-300">
-              Tem alguma dúvida ou sugestão? Nossa equipe está pronta para ajudar. Preencha o formulário ao lado ou entre em contato pelos nossos canais.
+              Tem alguma dúvida ou sugestão? Nossa equipe está pronta para ajudar. Preencha o formulário ao lado ou entre em contato pelo nosso canal.
             </p>
             <div className="space-y-2 text-gray-300">
-              <p><strong>Email:</strong> suporte@agendafixa.com</p>
-              <p><strong>WhatsApp:</strong> (31) 99198-8796</p>
+              <p><strong>WhatsApp:</strong> (31) 97314-9306</p>
             </div>
           </div>
           <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 shadow-xl">
