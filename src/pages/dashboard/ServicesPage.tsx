@@ -135,40 +135,73 @@ const ServicesPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow className="border-b-white/10 hover:bg-transparent">
-                <TableHead className="text-white">Nome</TableHead>
-                <TableHead className="text-white">Preço</TableHead>
-                <TableHead className="text-white">Duração</TableHead>
-                <TableHead className="text-right text-white">Ações</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {loading ? (
-                <TableRow>
-                  <TableCell colSpan={4} className="text-center text-gray-300 py-10">Carregando...</TableCell>
+          {/* Desktop View */}
+          <div className="hidden md:block">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-b-white/10 hover:bg-transparent">
+                  <TableHead className="text-white">Nome</TableHead>
+                  <TableHead className="text-white">Preço</TableHead>
+                  <TableHead className="text-white">Duração</TableHead>
+                  <TableHead className="text-right text-white">Ações</TableHead>
                 </TableRow>
-              ) : services.length > 0 ? (
-                services.map((service) => (
-                  <TableRow key={service.id} className="border-b-white/10 hover:bg-white/5">
-                    <TableCell className="font-medium text-white">{service.name}</TableCell>
-                    <TableCell className="text-gray-300">R$ {service.price.toFixed(2)}</TableCell>
-                    <TableCell className="text-gray-300">{service.duration} min</TableCell>
-                    <TableCell className="text-right">
-                      <ActionsMenu service={service} />
+              </TableHeader>
+              <TableBody>
+                {loading ? (
+                  <TableRow>
+                    <TableCell colSpan={4} className="text-center text-gray-300 py-10">Carregando...</TableCell>
+                  </TableRow>
+                ) : services.length > 0 ? (
+                  services.map((service) => (
+                    <TableRow key={service.id} className="border-b-white/10 hover:bg-white/5">
+                      <TableCell className="font-medium text-white">{service.name}</TableCell>
+                      <TableCell className="text-gray-300">R$ {service.price.toFixed(2)}</TableCell>
+                      <TableCell className="text-gray-300">{service.duration} min</TableCell>
+                      <TableCell className="text-right">
+                        <ActionsMenu service={service} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={4} className="text-center text-gray-300 py-10">
+                      Nenhum serviço encontrado. Adicione o primeiro!
                     </TableCell>
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={4} className="text-center text-gray-300 py-10">
-                    Nenhum serviço encontrado. Adicione o primeiro!
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+
+          {/* Mobile View */}
+          <div className="md:hidden space-y-4">
+            {loading ? (
+              <p className="text-center text-gray-300 py-10">Carregando...</p>
+            ) : services.length > 0 ? (
+              services.map((service) => (
+                <Card key={service.id} className="bg-white/5 border border-white/10">
+                  <CardHeader className="flex flex-row items-center justify-between pb-2">
+                    <CardTitle className="text-base text-white">{service.name}</CardTitle>
+                    <ActionsMenu service={service} />
+                  </CardHeader>
+                  <CardContent className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <DollarSign className="h-4 w-4" />
+                      <span>R$ {service.price.toFixed(2)}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <Clock className="h-4 w-4" />
+                      <span>{service.duration} min</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <p className="text-center text-gray-300 py-10">
+                Nenhum serviço encontrado. Adicione o primeiro!
+              </p>
+            )}
+          </div>
         </CardContent>
       </Card>
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
