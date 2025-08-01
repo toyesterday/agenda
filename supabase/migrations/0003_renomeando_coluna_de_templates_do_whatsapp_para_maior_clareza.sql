@@ -1,0 +1,1 @@
+ALTER TABLE public.whatsapp_templates RENAME COLUMN template_content TO meta_template_name;

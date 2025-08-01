@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 220 13% 98%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 217.2 91.2% 59.8%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .theme-pink-purple {
+    --primary: 330 82% 62%; /* Rosa vibrante */
+    --primary-foreground: 330 30% 98%;
+    --ring: 330 82% 62%;
+  }
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* FullCalendar Custom Styles */
+.fc {
+  --fc-border-color: hsl(var(--border) / 0.5);
+  --fc-daygrid-event-dot-width: 8px;
+  --fc-list-event-dot-width: 10px;
+  --fc-event-bg-color: hsl(var(--primary));
+  --fc-event-border-color: hsl(var(--primary));
+  --fc-event-text-color: hsl(var(--primary-foreground));
+  --fc-more-link-bg-color: hsl(var(--muted));
+  --fc-more-link-text-color: hsl(var(--muted-foreground));
+  --fc-today-bg-color: hsla(var(--primary) / 0.1);
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: transparent;
+}
+
+.fc .fc-button-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-ring rounded-md;
+}
+
+.fc .fc-button-primary:disabled {
+  @apply bg-primary/50;
+}
+
+.fc .fc-button-group > .fc-button {
+  @apply rounded-none;
+}
+.fc .fc-button-group > .fc-button:first-child {
+  @apply rounded-l-md;
+}
+.fc .fc-button-group > .fc-button:last-child {
+  @apply rounded-r-md;
+}
+
+.fc .fc-toolbar-title {
+  @apply text-lg font-bold text-white;
+}
+
+.fc .fc-col-header-cell-cushion {
+  @apply text-gray-300 no-underline;
+}
+
+.fc .fc-daygrid-day-number {
+  @apply text-gray-300;
+}
+
+.fc .fc-day-today {
+  background-color: hsla(var(--primary) / 0.1) !important;
+}
+
+.fc-theme-standard .fc-list {
+  @apply border-none;
+}
+
+.fc .fc-list-day-cushion {
+  @apply bg-white/5 p-2;
+}
+
+.fc .fc-list-event:hover td {
+  @apply bg-white/10;
+}
+
+.fc .fc-popover {
+  @apply bg-card border-border;
+}
+
+.fc .fc-popover-header {
+  @apply bg-card text-card-foreground;
+}
+
+.fc-license-message {
+  display: none !important;
+}
