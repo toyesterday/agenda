@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": ["deno.ns", "esnext"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "https://esm.sh/react@18.2.0",
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "allowJs": true,
+    "skipLibCheck": true
+  },
+  "include": ["./functions/**/*.ts"]
+}
