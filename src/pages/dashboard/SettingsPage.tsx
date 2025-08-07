@@ -38,7 +38,7 @@ const timezones = [
 ];
 
 const SettingsPage = () => {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -294,180 +294,184 @@ const SettingsPage = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white shadow-xl">
-            <CardHeader>
-              <CardTitle className="text-white">Notificações via Telegram</CardTitle>
-              <CardDescription className="text-gray-300">
-                Receba notificações de novos agendamentos diretamente no seu Telegram.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {loading ? (
-                <div className="space-y-4"><Skeleton className="h-10 w-full bg-white/10" /><Skeleton className="h-10 w-full bg-white/10" /></div>
-              ) : (
-                <div className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="telegram_notifications_enabled"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center justify-between rounded-lg border border-white/20 p-4">
-                        <div className="space-y-0.5">
-                          <FormLabel className="text-base text-gray-300">Ativar Notificações via Telegram</FormLabel>
-                          <FormDescription className="text-gray-400">Receba um alerta para cada novo agendamento.</FormDescription>
-                        </div>
-                        <FormControl><Switch checked={field.value} onCheckedChange={field.onChange} /></FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="telegram_bot_username"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Username do Bot</FormLabel>
-                        <FormControl><Input placeholder="Ex: MeuSalao_bot" {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
-                        <FormDescription className="text-gray-400">O username que você criou no BotFather, sem o "@".</FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="telegram_bot_token"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Token do Bot</FormLabel>
-                        <FormControl><Input placeholder="Token recebido do BotFather" {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="telegram_chat_id"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Seu Chat ID (Administrador)</FormLabel>
-                        <FormControl><Input placeholder="Seu ID de usuário do Telegram" {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              )}
-            </CardContent>
-          </Card>
+          {profile?.role === 'super_admin' && (
+            <>
+              <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white shadow-xl">
+                <CardHeader>
+                  <CardTitle className="text-white">Notificações via Telegram</CardTitle>
+                  <CardDescription className="text-gray-300">
+                    Receba notificações de novos agendamentos diretamente no seu Telegram.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {loading ? (
+                    <div className="space-y-4"><Skeleton className="h-10 w-full bg-white/10" /><Skeleton className="h-10 w-full bg-white/10" /></div>
+                  ) : (
+                    <div className="space-y-6">
+                      <FormField
+                        control={form.control}
+                        name="telegram_notifications_enabled"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-row items-center justify-between rounded-lg border border-white/20 p-4">
+                            <div className="space-y-0.5">
+                              <FormLabel className="text-base text-gray-300">Ativar Notificações via Telegram</FormLabel>
+                              <FormDescription className="text-gray-400">Receba um alerta para cada novo agendamento.</FormDescription>
+                            </div>
+                            <FormControl><Switch checked={field.value} onCheckedChange={field.onChange} /></FormControl>
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="telegram_bot_username"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-300">Username do Bot</FormLabel>
+                            <FormControl><Input placeholder="Ex: MeuSalao_bot" {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
+                            <FormDescription className="text-gray-400">O username que você criou no BotFather, sem o "@".</FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="telegram_bot_token"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-300">Token do Bot</FormLabel>
+                            <FormControl><Input placeholder="Token recebido do BotFather" {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="telegram_chat_id"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-300">Seu Chat ID (Administrador)</FormLabel>
+                            <FormControl><Input placeholder="Seu ID de usuário do Telegram" {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
 
-          <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white shadow-xl">
-            <CardHeader>
-              <CardTitle className="text-white">Configurações de Notificação (WhatsApp)</CardTitle>
-              <CardDescription className="text-gray-300">
-                Gerencie as notificações via WhatsApp para você e seus clientes.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {loading ? (
-                <div className="space-y-4">
-                  <Skeleton className="h-8 w-1/4 bg-white/10" />
-                  <Skeleton className="h-10 w-full bg-white/10" />
-                  <Skeleton className="h-8 w-1/4 bg-white/10" />
-                  <Skeleton className="h-10 w-full bg-white/10" />
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="business_whatsapp_number"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Número de WhatsApp do Negócio</FormLabel>
-                        <FormControl>
-                          <Input placeholder="5511999999999" {...field} className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:ring-primary focus:border-primary" />
-                        </FormControl>
-                        <FormDescription className="text-gray-400">
-                          Este número receberá as notificações de novos agendamentos. Use o formato internacional, ex: 5511987654321.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="notifications_enabled"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center justify-between rounded-lg border border-white/20 p-4">
-                        <div className="space-y-0.5">
-                          <FormLabel className="text-base text-gray-300">
-                            Ativar Notificações via WhatsApp
-                          </FormLabel>
-                          <FormDescription className="text-gray-400">
-                            Envie confirmações e lembretes para você e seus clientes.
-                          </FormDescription>
-                        </div>
-                        <FormControl>
-                          <Switch
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              )}
-            </CardContent>
-          </Card>
+              <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white shadow-xl">
+                <CardHeader>
+                  <CardTitle className="text-white">Configurações de Notificação (WhatsApp)</CardTitle>
+                  <CardDescription className="text-gray-300">
+                    Gerencie as notificações via WhatsApp para você e seus clientes.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {loading ? (
+                    <div className="space-y-4">
+                      <Skeleton className="h-8 w-1/4 bg-white/10" />
+                      <Skeleton className="h-10 w-full bg-white/10" />
+                      <Skeleton className="h-8 w-1/4 bg-white/10" />
+                      <Skeleton className="h-10 w-full bg-white/10" />
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      <FormField
+                        control={form.control}
+                        name="business_whatsapp_number"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-300">Número de WhatsApp do Negócio</FormLabel>
+                            <FormControl>
+                              <Input placeholder="5511999999999" {...field} className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:ring-primary focus:border-primary" />
+                            </FormControl>
+                            <FormDescription className="text-gray-400">
+                              Este número receberá as notificações de novos agendamentos. Use o formato internacional, ex: 5511987654321.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="notifications_enabled"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-row items-center justify-between rounded-lg border border-white/20 p-4">
+                            <div className="space-y-0.5">
+                              <FormLabel className="text-base text-gray-300">
+                                Ativar Notificações via WhatsApp
+                              </FormLabel>
+                              <FormDescription className="text-gray-400">
+                                Envie confirmações e lembretes para você e seus clientes.
+                              </FormDescription>
+                            </div>
+                            <FormControl>
+                              <Switch
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                              />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
 
-          <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white shadow-xl">
-            <CardHeader>
-              <CardTitle className="text-white">Nomes dos Modelos de Mensagem (WhatsApp)</CardTitle>
-              <CardDescription className="text-gray-300">
-                Insira aqui os nomes exatos dos modelos que você criou e que foram APROVADOS no painel da Meta.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {loading ? <Skeleton className="h-48 w-full bg-white/10" /> : (
-                <>
-                  <FormField
-                    control={form.control}
-                    name="template_name_client_confirmation"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Confirmação para o Cliente</FormLabel>
-                        <FormControl><Input {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
-                        <FormDescription className="text-gray-400">Nome do modelo para confirmar o agendamento com o cliente.</FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="template_name_business_notification"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Notificação para o seu Negócio</FormLabel>
-                        <FormControl><Input {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
-                        <FormDescription className="text-gray-400">Nome do modelo para te avisar de um novo agendamento.</FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="template_name_client_reminder"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Lembrete para o Cliente (24h antes)</FormLabel>
-                        <FormControl><Input {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
-                        <FormDescription className="text-gray-400">Nome do modelo para enviar o lembrete ao cliente.</FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </>
-              )}
-            </CardContent>
-          </Card>
+              <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white shadow-xl">
+                <CardHeader>
+                  <CardTitle className="text-white">Nomes dos Modelos de Mensagem (WhatsApp)</CardTitle>
+                  <CardDescription className="text-gray-300">
+                    Insira aqui os nomes exatos dos modelos que você criou e que foram APROVADOS no painel da Meta.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {loading ? <Skeleton className="h-48 w-full bg-white/10" /> : (
+                    <>
+                      <FormField
+                        control={form.control}
+                        name="template_name_client_confirmation"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-300">Confirmação para o Cliente</FormLabel>
+                            <FormControl><Input {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
+                            <FormDescription className="text-gray-400">Nome do modelo para confirmar o agendamento com o cliente.</FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="template_name_business_notification"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-300">Notificação para o seu Negócio</FormLabel>
+                            <FormControl><Input {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
+                            <FormDescription className="text-gray-400">Nome do modelo para te avisar de um novo agendamento.</FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="template_name_client_reminder"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-gray-300">Lembrete para o Cliente (24h antes)</FormLabel>
+                            <FormControl><Input {...field} className="bg-white/5 border-white/20 text-white" /></FormControl>
+                            <FormDescription className="text-gray-400">Nome do modelo para enviar o lembrete ao cliente.</FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
+                </CardContent>
+              </Card>
+            </>
+          )}
           
           {!loading && (
             <Button type="submit" disabled={saving}>
